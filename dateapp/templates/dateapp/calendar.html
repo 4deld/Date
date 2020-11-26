@@ -41,6 +41,9 @@
     .verticalGutter {
       margin-top: 0.5%;
     }
+    a{
+      text-decoration: none;
+    }
   </style>
 </head>
 
@@ -92,37 +95,37 @@
           else if (i == 0 && j == firstDayName) {// j == firstDayName: 이번 달 시작 요일일 때
             if (j == 0) {
               calHtml +=
-                `<div style='background-color:#FFE0BB;' class='calendar__day horizontalGutter'><span>${startDayCount}</span><span id='${year}${month}${setFixDayCount(startDayCount++)}'></span></div>`;
+                `<a href="/dateapp/detail" style='background-color:#FFE0BB;' class='calendar__day horizontalGutter'><span>${startDayCount}</span><span id='${year}-${month}-${setFixDayCount(startDayCount++)}'></span></a>`;
             } else if (j == 6) {
               calHtml +=
-                `<div style='background-color:#FFE0BB;' class='calendar__day'><span>${startDayCount}</span><span id='${year}${month}${setFixDayCount(startDayCount++)}'></span></div>`;
+                `<a href="/dateapp/detail" style='background-color:#FFE0BB;' class='calendar__day'><span>${startDayCount}</span><span id='${year}-${month}-${setFixDayCount(startDayCount++)}'></span></a>`;
             } else { 
               calHtml +=
-                `<div style='background-color:#FFE0BB;' class='calendar__day horizontalGutter'><span>${startDayCount}</span><span id='${year}${month}${setFixDayCount(startDayCount++)}'></span></div>`;
+                `<a href="/dateapp/detail" style='background-color:#FFE0BB;' class='calendar__day horizontalGutter'><span>${startDayCount}</span><span id='${year}-${month}-${setFixDayCount(startDayCount++)}'></span></a>`;
             }
           }
           else if (i == 0 && j > firstDayName) { // j > firstDayName: 이번 달 시작 요일 이후 일 때
             if (j == 0) {
               calHtml +=
-                `<div style='background-color:#FFFFBB' class='calendar__day horizontalGutter'><span>${startDayCount}</span><span id='${year}${month}${setFixDayCount(startDayCount++)}'></span></div>`;
+                `<a href="/dateapp/detail" style='background-color:#FFFFBB' class='calendar__day horizontalGutter'><span>${startDayCount}</span><span id='${year}-${month}-${setFixDayCount(startDayCount++)}'></span></a>`;
             } else if (j == 6) {
               calHtml +=
-                `<div style='background-color:#FFFFBB' class='calendar__day'><span>${startDayCount}</span><span id='${year}${month}${setFixDayCount(startDayCount++)}'></span></div>`;
+                `<a href="/dateapp/detail" style='background-color:#FFFFBB' class='calendar__day'><span>${startDayCount}</span><span id='${year}-${month}-${setFixDayCount(startDayCount++)}'></span></a>`;
             } else {
               calHtml +=
-                `<div style='background-color:#FFFFBB' class='calendar__day horizontalGutter'><span>${startDayCount}</span><span id='${year}${month}${setFixDayCount(startDayCount++)}'></span></div>`;
+                `<a href="/dateapp/detail" style='background-color:#FFFFBB' class='calendar__day horizontalGutter'><span>${startDayCount}</span><span id='${year}-${month}-${setFixDayCount(startDayCount++)}'></span></a>`;
             }
           }
           else if (i > 0 && startDayCount <= lastDay) { // startDayCount <= lastDay: 이번 달의 마지막 날이거나 이전일 때
             if (j == 0) {
               calHtml +=
-                `<div style='background-color:#BBFFC9;'class='calendar__day horizontalGutter verticalGutter'><span>${startDayCount}</span><span id='${year}${month}${setFixDayCount(startDayCount++)}'></span></div>`;
+                `<a href="/dateapp/detail" style='background-color:#BBFFC9;'class='calendar__day horizontalGutter verticalGutter'><span>${startDayCount}</span><span id='${year}-${month}-${setFixDayCount(startDayCount++)}'></span></a>`;
             } else if (j == 6) {
               calHtml +=
-                `<div style='background-color:#BBFFC9;'class='calendar__day verticalGutter'><span>${startDayCount}</span><span id='${year}${month}${setFixDayCount(startDayCount++)}'></span></div>`;
+                `<a href="/dateapp/detail" style='background-color:#BBFFC9;'class='calendar__day verticalGutter'><span>${startDayCount}</span><span id='${year}-${month}-${setFixDayCount(startDayCount++)}'></span></a>`;
             } else {
               calHtml +=
-                `<div style='background-color:#BBFFC9;'class='calendar__day horizontalGutter verticalGutter'><span>${startDayCount}</span><span id='${year}${month}${setFixDayCount(startDayCount++)}'></span></div>`;
+                `<a href="/dateapp/detail" style='background-color:#BBFFC9;'class='calendar__day horizontalGutter verticalGutter'><span>${startDayCount}</span><span id='${year}-${month}-${setFixDayCount(startDayCount++)}'></span></a>`;
             }
           }
           else if (startDayCount > lastDay) { // startDayCount > lastDay: 이번 달의 마지막 날 이후일 때
@@ -168,10 +171,18 @@
       var Info = JSON.parse(document.getElementById('jsonData').textContent);
       for( var key1 in Info){
           var jsonData = JSON.parse(Info[key1])
-             for (var key2 in jsonData)
-          {
-              document.write(key2+" : " +jsonData[key2]+"<br>")            
-          }
+          // console.log(key1) 0 1 2 3
+          //    for (var key2 in jsonData){
+          //   //console.log(key2) InfoId username date time do 
+          //   if(key2=='date'){
+          //     jsonData[key2] = jsonData[key2].replaceAll('-','')
+          //     document.getElementById(jsonData[key2]).innerHTML = "<br>"+jsonData['username']+"<br>"+jsonData['time']+"<br>"+jsonData['do']
+          //   }
+          //     document.write(key2+" : " +jsonData[key2]+"<br>")            
+          // }
+          //jsonData['date'] = jsonData['date'].replaceAll('-','')
+          document.getElementById(jsonData['date']).innerHTML = "<br>"+jsonData['username']+"<br>"+jsonData['time']+"<br>"+jsonData['do']
+
       }
   </script>
 
@@ -179,7 +190,7 @@
 
 
 {% for info in context.values %}
-  <div>{{info.do}}</div>
+  <div>{{info}}</div>
 {% endfor %}
 
 

@@ -8,16 +8,14 @@ from .models import Person, Info
 
 
 def index(request):
-    a = Person.objects.get(username="Harry")
-    return render(request, 'dateapp/index.html',{'userl':a})
+    return render(request, 'dateapp/index.html')
 
-def detail(request, user_id):
-    user = get_object_or_404(Person, pk=user_id)
-    return render(request, 'dateapp/detail.html', {'user': user})
+def detail(request, person_id, info_id): 
+    username = get_object_or_404(Person, pk=person_id)
+    date = get_object_or_404(Info, pk=info_id)
+    infos=Info.objects.all().order_by('date') # filter date로
+    return render(request, 'dateapp/detail.html')
 
-# def results(request, user_id):
-#     response = "You're looking at the results of question %s."
-#     return HttpResponse(response % user_id)
 
 def calendar(request):
     informations=Info.objects.all().order_by('date') # 날짜순으로 정렬
@@ -43,3 +41,5 @@ def calendar(request):
 
     print(context)
     return render(request, 'dateapp/calendar.html',{'context':context})
+
+#def name(request):

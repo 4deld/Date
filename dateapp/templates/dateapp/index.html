@@ -3,9 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Index</title>
+    <title>Document</title>
 </head>
 <body>
-    
+    <div>날짜 잡는 사이트</div>
+    <form action="{% url 'dateapp:calendar' %}" method="post">
+        {% csrf_token %}
+        <label for="name">이름을 입력하세요 : </label>
+        <input type="text" id="name" required>
+        <a href="/dateapp/calendar"><input type="submit" value="확인"></a> 
+    </form>
 </body>
 </html>
