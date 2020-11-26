@@ -11,14 +11,33 @@ def index(request):
     return render(request, 'dateapp/index.html')
 
 def detail(request): 
-    #date = get_object_or_404(Info, pk=info_id)
+    namevalue = request.POST['namevalue']
+    inputdate = request.POST['date']
     #infos=Info.objects.all().order_by('date') # filter date로
-    return render(request, 'dateapp/detail.html',)
+    return render(request, 'dateapp/detail.html',{
+        'namevalue':namevalue,
+        'date':inputdate
+        })
 
 
 def calendar(request):
-    username = request.POST['namevalue']
-    print(username)
+    try:
+        namevalue = request.POST['namevalue']
+        print(namevalue)
+        try:
+            timevalue = request.POST['timevalue']
+            datevalue = request.POST['datevalue']
+            dovalue = request.POST['dovalue']
+            print(datevalue)
+            print(type(datevalue))
+            print(dovalue)
+            print(timevalue)
+        except (KeyError):
+            pass
+    except (KeyError):
+        return render(request, 'dateapp/index.html', {
+            'error_message': "Please write your name"
+        })
     informations=Info.objects.all().order_by('date') # 날짜순으로 정렬
     context={} #context- dict 내용물 - str
     a=0
@@ -42,7 +61,6 @@ def calendar(request):
     #print(context)
     return render(request, 'dateapp/calendar.html',{
         'context':context,
-        'username':username
+        'namevalue':namevalue
         })
 
-#def name(request):

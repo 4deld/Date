@@ -7,11 +7,12 @@
 </head>
 <body>
     <h1>날짜 잡는 사이트</h1>
-    <div></div>
-    <form action="{% url 'dateapp:calendar' %}" method="post" autocomplete="off">
+    <h3>빨리 좀 잡자 짜증나게하지말고</h3>
+    {% if error_message %}<p><strong style="color: red;">{{ error_message }}</strong></p>{% endif %}
+    <form action="{% url 'dateapp:calendar' %}" method="post" autocomplete="off">{% csrf_token %}
         <input type="hidden" autocomplete="false">
-        {% csrf_token %}
-        <label for="name">이름을 입력하세요 : </label>
+        
+        <label for="name">이름을 입력 : </label>
         <input type="text" id="name" required name="namevalue" >
         <input type="submit" value="확인">
     </form>

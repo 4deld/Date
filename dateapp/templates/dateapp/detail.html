@@ -6,6 +6,18 @@
     <title>Details</title>
 </head>
 <body>
-    
+    <h1>{{date}}</h1>
+    <h1>{{namevalue}}</h1>
+    <form action="{% url 'dateapp:calendar' %}" method="post" autocomplete="off">{% csrf_token %}
+        <input type="hidden" autocomplete="false">
+        <input type="date" required name="datevalue" value="{{date}}" >
+        <input type="text" required name="namevalue" value="{{namevalue}}" >
+        
+        <label for="time">되는 시간을 입력(몇시부터 된다)) : </label>
+        <input type="time" id="time" required name="timevalue" >
+        <label for="do">하고싶은 것을 입력 : </label>
+        <input type="text" id="do" required name="dovalue" >
+        <input type="submit" value="확인">
+    </form>
 </body>
 </html>

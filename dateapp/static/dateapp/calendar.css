@@ -8,10 +8,12 @@ html {
     position: relative;
   }
 
+
   #calendar {
     height: 99%;
     box-sizing: border-box;
     padding: 0.5%;
+    font-size: 20px;
   }
 
   .calendar__day {
@@ -21,7 +23,6 @@ html {
     height: calc(98% / 5);
     box-sizing: border-box;
     border-radius: 5px;
-    padding: 20px;
     color: black;
   }
 
@@ -34,4 +35,14 @@ html {
   }
   a{
     text-decoration: none;
+  }
+
+  .your-id{
+    width: calc(100%);
+    height: calc(100%);
+    cursor: pointer;
+  }
+
+  input{
+    display: none;
   }
