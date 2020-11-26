@@ -10,11 +10,11 @@ from .models import Person, Info
 def index(request):
     return render(request, 'dateapp/index.html')
 
-def detail(request, person_id, info_id): 
-    username = get_object_or_404(Person, pk=person_id)
-    date = get_object_or_404(Info, pk=info_id)
-    infos=Info.objects.all().order_by('date') # filter date로
-    return render(request, 'dateapp/detail.html')
+def detail(request): 
+    user = request.POST['namevalue']
+    #date = get_object_or_404(Info, pk=info_id)
+    #infos=Info.objects.all().order_by('date') # filter date로
+    return render(request, 'dateapp/detail.html',{'user':user})
 
 
 def calendar(request):

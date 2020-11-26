@@ -6,12 +6,14 @@
     <title>Document</title>
 </head>
 <body>
-    <div>날짜 잡는 사이트</div>
-    <form action="{% url 'dateapp:calendar' %}" method="post">
+    <h1>날짜 잡는 사이트</h1>
+    <div></div>
+    <form action="{% url 'dateapp:detail' %}" method="post" autocomplete="off">
+        <input type="hidden" autocomplete="false">
         {% csrf_token %}
         <label for="name">이름을 입력하세요 : </label>
-        <input type="text" id="name" required>
-        <a href="/dateapp/calendar"><input type="submit" value="확인"></a> 
+        <input type="text" id="name" required name="namevalue" >
+        <input type="submit" value="확인">
     </form>
 </body>
 </html>
