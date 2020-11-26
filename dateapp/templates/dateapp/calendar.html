@@ -46,9 +46,10 @@
 
 <body>
   <div id="calendar"></div>
-  <script>
+
+  <script type="text/javascript">
     const today = new Date();
-    const setCalendarData = (year, month) => { //둘다 진짜임
+    const setCalendarData = (year, month) => { // 둘 다 인간이 생각하는,,
       let calHtml = "";
       const setDate = new Date(year, month - 1, 1); //컴퓨터는 1 빼서 생각해서 month에서 1을 빼준다
       const firstDay = setDate.getDate();//getDate(): Get the day as a number (1-31) //이번 달의 첫째 날을 구한다
@@ -159,15 +160,30 @@
       setCalendarData(today.getFullYear(), "" + (today.getMonth() + 1)); //20201011
     }
 
-
-
-
-    
-    var a = "{{informations}}"
-    console.log(a)
     
   </script>
-  
+  {% if context %}
+  {{ context | json_script:'jsonData'}}
+  <script type = "text/javascript"> 
+      var Info = JSON.parse(document.getElementById('jsonData').textContent);
+      for( var key1 in Info){
+          var jsonData = JSON.parse(Info[key1])
+             for (var key2 in jsonData)
+          {
+              document.write(key2+" : " +jsonData[key2]+"<br>")            
+          }
+      }
+  </script>
+
+{% endif %}
+
+
+{% for info in context.values %}
+  <div>{{info.do}}</div>
+{% endfor %}
+
+
+  <!-- {{context.x}}  얘는 dict로  {1:[infotable의 id, user_id, date, time, do]} --> 
   {% for info in informations %}
         <div>{{ info.id }}</div> InfoTBL의 id (pk)
         <div>{{ info.date }}</div> 
