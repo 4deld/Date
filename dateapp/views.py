@@ -11,20 +11,20 @@ def index(request):
     return render(request, 'dateapp/index.html')
 
 def detail(request): 
-    user = request.POST['namevalue']
     #date = get_object_or_404(Info, pk=info_id)
     #infos=Info.objects.all().order_by('date') # filter date로
-    return render(request, 'dateapp/detail.html',{'user':user})
+    return render(request, 'dateapp/detail.html',)
 
 
 def calendar(request):
+    username = request.POST['namevalue']
+    print(username)
     informations=Info.objects.all().order_by('date') # 날짜순으로 정렬
     context={} #context- dict 내용물 - str
     a=0
-    print(informations[1].user)
     for row in informations.values_list():
         # context.update({a:json.dumps(row,sort_keys=True,indent=4,cls=DjangoJSONEncoder)})
-        print(row)
+        #print(row)
         InfoId=row[0]
         personname=str(informations[a].user)
         date=str(row[2])
@@ -38,8 +38,11 @@ def calendar(request):
         print(y)
         context.update({a:y})
         a=a+1
-
-    print(context)
-    return render(request, 'dateapp/calendar.html',{'context':context})
+    #context.update({'user':user})
+    #print(context)
+    return render(request, 'dateapp/calendar.html',{
+        'context':context,
+        'username':username
+        })
 
 #def name(request):

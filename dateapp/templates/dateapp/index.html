@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Index</title>
 </head>
 <body>
     <h1>날짜 잡는 사이트</h1>
     <div></div>
-    <form action="{% url 'dateapp:detail' %}" method="post" autocomplete="off">
+    <form action="{% url 'dateapp:calendar' %}" method="post" autocomplete="off">
         <input type="hidden" autocomplete="false">
         {% csrf_token %}
         <label for="name">이름을 입력하세요 : </label>
