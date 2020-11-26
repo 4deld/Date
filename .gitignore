@@ -127,3 +127,11 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+Tables.xlsx
+
+~$Tables.xlsx
+
+memo.txt
+
+information.txt

@@ -17,6 +17,6 @@ def detail(request, user_id):
 #     return HttpResponse(response % user_id)
 
 def calendar(request):
-    a=Info.objects.all().order_by('date')
-    print(a)
-    return render(request, 'dateapp/calendar.html',{'a':a})
+    informations=Info.objects.all().order_by('date') # 날짜순으로 정렬
+    print(informations)
+    return render(request, 'dateapp/calendar.html',{'informations':informations})
