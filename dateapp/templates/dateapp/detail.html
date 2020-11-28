@@ -47,7 +47,7 @@
     {% endif %}
     <form action="{% url 'dateapp:calendar' %}" method="post" autocomplete="off">{% csrf_token %}
         <div onclick="$(this).closest('form').submit()" class="tocalendar" style="width: fit-content; height: fit-content; cursor: pointer; font-size: 30px; margin: 40px;">
-            <div style="width: fit-content; height: fit-content;">Back to the Calendar</div>
+            <div style="width: fit-content; height: fit-content;">Want to back to the Calendar? ( click )</div>
             <input type="text" required name="namevalue" value="{{namevalue}}" class="hidden">
         </div>
     </form>
