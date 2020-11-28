@@ -6,15 +6,14 @@
     <title>Index</title>
 </head>
 <body>
-    <h1>날짜 잡는 사이트</h1>
-    <h3>빨리 좀 잡자 짜증나게하지말고</h3>
+    <h1 style="font-size: 50px;">Date</h1>
     {% if error_message %}<p><strong style="color: red;">{{ error_message }}</strong></p>{% endif %}
     <form action="{% url 'dateapp:calendar' %}" method="post" autocomplete="off">{% csrf_token %}
         <input type="hidden" autocomplete="false">
         
-        <label for="name">이름을 입력 : </label>
-        <input type="text" id="name" required name="namevalue" >
-        <input type="submit" value="확인">
+        <label for="name" style="font-size: 40px;">Type Your Name : </label>
+        <input type="text" id="name" required name="namevalue" style="height: 30px;">
+        <input type="submit" value="confirm" style="width:100px; height:40px;">
     </form>
 </body>
 </html>

@@ -4,20 +4,57 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Details</title>
+    {% load static %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'dateapp/detail.css' %}">
 </head>
 <body>
-    <h1>{{date}}</h1>
-    <h1>{{namevalue}}</h1>
+    <div class="date" style="font-size: 40px;">{{date}}</div>
+    <br>
+    <div style="font-size: 30px; padding-left: 10px;">Your Name : {{namevalue}}</div>
+    
     <form action="{% url 'dateapp:calendar' %}" method="post" autocomplete="off">{% csrf_token %}
         <input type="hidden" autocomplete="false">
-        <input type="date" required name="datevalue" value="{{date}}" >
-        <input type="text" required name="namevalue" value="{{namevalue}}" >
-        
-        <label for="time">되는 시간을 입력(몇시부터 된다)) : </label>
-        <input type="time" id="time" required name="timevalue" >
-        <label for="do">하고싶은 것을 입력 : </label>
-        <input type="text" id="do" required name="dovalue" >
-        <input type="submit" value="확인">
+        <input type="date" required name="datevalue" value="{{date}}" class="hidden">
+        <input type="text" required name="namevalue" value="{{namevalue}}" class="hidden">
+        <div class="box">
+            <div class="inputcontainer">
+                <div class="eachinput">
+                    <label for="time">When do you have time? : </label> 
+                    <input type="time" id="time" required name="timevalue" >
+                </div>
+                {% if error_message %}<p><strong style="color: red;">{{ error_message }}</strong></p>{% endif %}
+
+                <div class="eachinput">
+                    <label for="do">What do you want to do? : </label>
+                    <input type="text" id="do" required name="dovalue" >
+                </div>
+            </div>
+            <input type="submit" value="submit" id="sb">
+        </div>
     </form>
+    
+    {% if info %}
+    <div class="infobox">
+        {% for i in info %}
+        <div class="infocontainer">
+            <div>{{i.user}}</div>
+            <div>{{i.time}}</div>
+            <div>{{i}}</div>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    <form action="{% url 'dateapp:calendar' %}" method="post" autocomplete="off">{% csrf_token %}
+        <div onclick="$(this).closest('form').submit()" class="tocalendar" style="width: fit-content; height: fit-content; cursor: pointer; font-size: 30px; margin: 40px;">
+            <div style="width: fit-content; height: fit-content;">Back to the Calendar</div>
+            <input type="text" required name="namevalue" value="{{namevalue}}" class="hidden">
+        </div>
+    </form>
+
+    <script>
+        
+    </script>
+
 </body>
 </html>

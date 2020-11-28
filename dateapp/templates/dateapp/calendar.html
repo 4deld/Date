@@ -6,7 +6,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
   <title>Calendar</title>
-  <!--스타일링 추가-->
   {% load static %}
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <link rel="stylesheet" type="text/css" href="{% static 'dateapp/calendar.css' %}">
@@ -14,7 +13,10 @@
 </head>
 
 <body>
-  <div>당신의 이름 : {{namevalue}}</div>
+  <div style="display: flex; flex-direction: row; font-size: 30px; margin: 10px; justify-content: space-between;">
+    <div>Your Name : {{namevalue}}</div>
+    <a href="{% url 'dateapp:index' %}">Want to Retype your name?</a>
+  </div>
   <div id="calendar"></div>
   <script type="text/javascript">
     const today = new Date();
@@ -67,7 +69,7 @@
                 `<form action="{% url 'dateapp:detail' %}" method="post" style='background-color:#FFE0BB;' class='calendar__day '>{% csrf_token %}<div onclick="$(this).closest('form').submit();" class="your-id" ><input type="text" id="time" required name="namevalue" value="{{namevalue}}" ><input type="text" id="do" required name="date" value='${year}-${month}-${setFixDayCount(startDayCount)}'><input type="submit" ><span>${startDayCount}</span><span id='${year}-${month}-${setFixDayCount(startDayCount++)}'></span></div></form>`;
             } else { 
               calHtml +=
-              `<form action="{% url 'dateapp:detail' %}" method="post" style='background-color:#FFE0BB;' class='calendar__day horizontalGutter '>{% csrf_token %}<div class="your-id" ><input type="text" id="time" required name="namevalue" value="{{namevalue}}" ><input type="text" id="do" required name="date" value='${year}-${month}-${setFixDayCount(startDayCount)}'><input type="submit" ><span>${startDayCount}</span><span id='${year}-${month}-${setFixDayCount(startDayCount++)}'></span></div></form>`
+              `<form action="{% url 'dateapp:detail' %}" method="post" style='background-color:#FFE0BB;' class='calendar__day horizontalGutter '>{% csrf_token %}<div onclick="$(this).closest('form').submit();" class="your-id" ><input type="text" id="time" required name="namevalue" value="{{namevalue}}" ><input type="text" id="do" required name="date" value='${year}-${month}-${setFixDayCount(startDayCount)}'><input type="submit" ><span>${startDayCount}</span><span id='${year}-${month}-${setFixDayCount(startDayCount++)}'></span></div></form>`
             }
           }
           else if (i == 0 && j > firstDayName) { // j > firstDayName: 이번 달 시작 요일 이후 일 때
@@ -135,6 +137,11 @@
   {{ context | json_script:'jsonData'}}
   <script type = "text/javascript"> 
       var Info = JSON.parse(document.getElementById('jsonData').textContent);
+      console.log(Info)
+      jjson={
+            'data':[]
+          }
+      newArray = new Array()
       for( var key1 in Info){
           var jsonData = JSON.parse(Info[key1])
           // console.log(key1) 0 1 2 3
@@ -147,9 +154,23 @@
           //     document.write(key2+" : " +jsonData[key2]+"<br>")            
           // }
           //jsonData['date'] = jsonData['date'].replaceAll('-','')
-          document.getElementById(jsonData['date']).innerHTML += "<br>"+jsonData['username']+"<br>"+jsonData['time']+"<br>"+jsonData['do']
-
+          jjson.data.push(jsonData)
+          newArray.push(jjson.data.filter(function (el){
+            return el.date==jsonData['date']
+        }))
+        var samedate = (jjson.data.filter(function (el){
+            return el.date==jsonData['date']
+        })).length
+        if(samedate==1){
+        document.getElementById(jsonData['date']).innerHTML += "<br>"+jsonData['username']+"<br>"+jsonData['time']+"<br>"+jsonData['do']
+        }
+        else if(samedate==2){
+        document.getElementById(jsonData['date']).innerHTML += "<br>"+"•••"
+        }
       }
+
+      
+      
   </script>
 <!-- {% endif %}
 

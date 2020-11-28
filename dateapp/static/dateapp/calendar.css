@@ -41,8 +41,10 @@ html {
     width: calc(100%);
     height: calc(100%);
     cursor: pointer;
+
   }
 
   input{
     display: none;
   }
+

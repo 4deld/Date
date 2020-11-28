@@ -1,0 +1,50 @@
+.hidden{
+    display: none;
+}
+
+.inputcontainer{
+    display: flex;
+    flex-direction: column;
+    
+}
+
+body{
+    width: 100vw;
+    height: 100vh;
+    box-sizing: border-box;
+    margin: 0;
+}
+
+.date{
+    font-weight: bold;
+}
+
+.box{
+    display: flex;
+    flex-direction: row;
+    font-size: 30px;
+    align-items: center;
+}
+
+.eachinput{
+    padding: 10px;
+}
+
+#sb{
+    height: 40px;
+    width: 100px;
+    margin-left: 50px;
+}
+
+.infobox{
+    display: flex;
+    flex-wrap: wrap;
+    margin: 10px;
+}
+
+.infocontainer{
+    width: 200px;
+    height: 200px;
+    padding: 20px;
+    font-size: 30px;
+}
