@@ -25,8 +25,7 @@ SECRET_KEY = 'b7!&=*c$qdh1=u5*gcw_yyd5$d7p=-b*qzra!ajdc4lgwzz&2!'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ['*']
 STATIC_URL = '/static/'
 # Application definition
 
@@ -120,8 +119,3 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
-
-# Heroku: Update database configuration from $DATABASE_URL.
-import dj_database_url
-db_from_env = dj_database_url.config(conn_max_age=500)
-DATABASES['default'].update(db_from_env)
